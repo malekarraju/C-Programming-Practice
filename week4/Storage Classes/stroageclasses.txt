@@ -1,0 +1,403 @@
+# **************** Storage Classes in C ****************
+
+Storage classes in C define the scope, lifetime, linkage, and default initialization behavior of a variable.
+
+C has four commonly used storage classes:
+
+* `auto`
+* `register`
+* `static`
+* `extern`
+
+---
+
+## Why Do We Need Storage Classes?
+
+Storage classes help us control:
+
+* Where a variable can be accessed.
+* How long a variable exists.
+* Whether its value is retained between function calls.
+* Whether a variable can be accessed from another source file.
+* How a variable is linked across multiple `.c` files.
+
+---
+
+# 1. auto
+
+`auto` is the default storage class for local variables.
+
+Example:
+
+```c
+void fun()
+{
+    auto int x = 10;
+}
+```
+
+The following is normally equivalent:
+
+```c
+void fun()
+{
+    int x = 10;
+}
+```
+
+Characteristics:
+
+* Scope: Local/block
+* Lifetime: Until the block finishes
+* Default value: Indeterminate if not initialized
+* Linkage: None
+
+Example:
+
+```c
+void fun()
+{
+    int x = 10;
+}
+```
+
+When `fun()` finishes, `x` ceases to exist.
+
+---
+
+# 2. register
+
+`register` is used to request the compiler to keep a frequently used variable in a CPU register, if possible.
+
+Example:
+
+```c
+register int i;
+
+for(i = 0; i < 10; i++)
+{
+    printf("%d ", i);
+}
+```
+
+Important points:
+
+* It is only a request to the compiler.
+* The compiler may ignore the request.
+* It is generally used for local variables.
+* It has automatic storage duration.
+* You cannot use `&` to obtain the address of a `register` object.
+
+Example:
+
+```c
+register int x = 10;
+
+// printf("%p", &x);   // Not allowed
+```
+
+Modern compilers perform their own optimization, so explicit `register` is rarely necessary.
+
+---
+
+# 3. static
+
+`static` has two important uses.
+
+## A. Static Local Variable
+
+A static local variable retains its value between function calls.
+
+Example:
+
+```c
+#include <stdio.h>
+
+void fun()
+{
+    static int x = 0;
+
+    x++;
+
+    printf("%d\n", x);
+}
+
+int main()
+{
+    fun();
+    fun();
+    fun();
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+1
+2
+3
+```
+
+Normally:
+
+```c
+int x = 0;
+```
+
+would be initialized every time the function is called.
+
+But:
+
+```c
+static int x = 0;
+```
+
+is initialized only once and retains its value.
+
+Important:
+
+```text
+Scope    → Local
+Lifetime → Entire program
+```
+
+So a static local variable is accessible only inside its block, but it exists throughout the program.
+
+---
+
+## B. Static Global Variable
+
+A `static` variable declared outside all functions has internal linkage.
+
+Example:
+
+```c
+static int count = 10;
+```
+
+It can be accessed only within that source file.
+
+This is useful for hiding implementation details in multi-file programs.
+
+For example:
+
+```text
+file1.c
+    static int count;
+
+file2.c
+    cannot directly access count
+```
+
+---
+
+# 4. extern
+
+`extern` is used when a variable is defined in another place, commonly another source file.
+
+Example:
+
+file1.c:
+
+```c
+int x = 100;
+```
+
+file2.c:
+
+```c
+extern int x;
+
+printf("%d", x);
+```
+
+Here:
+
+```c
+extern int x;
+```
+
+tells the compiler that `x` is defined somewhere else.
+
+Important distinction:
+
+```c
+int x = 100;
+```
+
+is a definition.
+
+```c
+extern int x;
+```
+
+is normally a declaration referring to an existing definition.
+
+---
+
+# Scope, Lifetime and Linkage
+
+These three concepts are important when understanding storage classes.
+
+Scope:
+
+```text
+Where can I access the variable?
+```
+
+Lifetime:
+
+```text
+How long does the variable exist?
+```
+
+Linkage:
+
+```text
+Can the same variable be referred to from another source file?
+```
+
+Example:
+
+```c
+void fun()
+{
+    static int x = 10;
+}
+```
+
+Here:
+
+```text
+Scope    → Local
+Lifetime → Entire program
+Linkage  → None
+```
+
+---
+
+# Storage Class Comparison
+
+| Storage Class   | Scope                 | Lifetime               | Linkage  | Default               |
+| --------------- | --------------------- | ---------------------- | -------- | --------------------- |
+| `auto`          | Local                 | Block                  | None     | Indeterminate         |
+| `register`      | Local                 | Block                  | None     | Indeterminate         |
+| `static` local  | Local                 | Entire program         | None     | 0                     |
+| `static` global | File                  | Entire program         | Internal | 0                     |
+| `extern`        | Depends on definition | Usually entire program | External | Depends on definition |
+
+---
+
+# Important Example
+
+```c
+#include <stdio.h>
+
+void fun()
+{
+    int a = 0;
+    static int b = 0;
+
+    a++;
+    b++;
+
+    printf("a = %d, b = %d\n", a, b);
+}
+
+int main()
+{
+    fun();
+    fun();
+    fun();
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+a = 1, b = 1
+a = 1, b = 2
+a = 1, b = 3
+```
+
+Why?
+
+```text
+a → recreated on every function call
+b → retains its previous value
+```
+
+This is one of the most important examples for understanding `static`.
+
+---
+
+# Common Mistakes
+
+### 1. `static` does not always mean global
+
+This is valid:
+
+```c
+void fun()
+{
+    static int x;
+}
+```
+
+`x` is local in scope.
+
+### 2. `register` does not guarantee register storage
+
+The compiler decides the actual storage.
+
+### 3. `extern` does not normally create a new variable
+
+It refers to an existing definition.
+
+### 4. Scope and lifetime are different
+
+A variable can have local scope but program-long lifetime, as with a static local variable.
+
+---
+
+# Interview Questions
+
+* What is a storage class in C?
+* What are the four storage classes?
+* What is the default storage class for a local variable?
+* What is the difference between `auto` and `static`?
+* Why does a static local variable retain its value?
+* What is the scope and lifetime of a static local variable?
+* What is internal linkage?
+* What is external linkage?
+* What is the purpose of `extern`?
+* Difference between declaration and definition?
+* Does `register` guarantee CPU register storage?
+* Can we use `&` with a register variable?
+* Can another file access a `static` global variable?
+* Difference between `static` and `extern`?
+
+---
+
+# Summary
+
+```text
+auto     → Normal local variable
+register → Request for register storage
+static   → Retains value / file-private global
+extern   → Refers to a variable defined elsewhere
+```
+
+The most important concepts to remember are:
+
+```text
+Scope    → Where variable is accessible
+Lifetime → How long variable exists
+Linkage  → Whether it can be referred to from another file
+```
+
+For interviews, the most important storage class is `static`, especially the difference between a static local variable and a static global variable.

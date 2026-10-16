@@ -1,0 +1,17 @@
+
+WEEK 2 : TechnoScripts Batch P123
+========================================xx=============================================
+
+20-07-2026
+
+Increment & Decrement 
+     -syntax: (++var, var++) (--var, var--)
+     -Pre: fist update then assign (++x)
+     -Post: first assign then update (x++)
+     
+ASCII (American Standard code for information interchange)
+ - 
+
+Type casting: "char - short - int - long - float - double"
+ - Implicit (auto)
+ - Explicit (manual)

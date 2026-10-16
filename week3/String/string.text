@@ -1,0 +1,1869 @@
+# **************** Strings in C (Complete Guide) ****************
+
+Strings are one of the most important concepts in C programming.
+
+A string is a sequence of characters stored inside a character array and terminated by a special character called the null character `'\0'`.
+
+C does not have a separate built-in `string` data type. Instead, strings are implemented using character arrays.
+
+---
+
+# Definition
+
+A string in C is a collection of characters stored in a `char` array and ending with the null character `'\0'`.
+
+Example:
+
+```c
+char name[5] = {'R', 'A', 'J', 'U', '\0'};
+```
+
+It represents:
+
+```text
+R A J U \0
+```
+
+The `'\0'` tells the compiler where the string ends.
+
+---
+
+# Why Do We Need Strings?
+
+Suppose you want to store a person's name.
+
+Without a string, you would need separate variables:
+
+```c
+char c1 = 'R';
+char c2 = 'A';
+char c3 = 'J';
+char c4 = 'U';
+```
+
+This is inconvenient.
+
+Using a string:
+
+```c
+char name[] = "RAJU";
+```
+
+All characters are stored under one array name.
+
+---
+
+# Important Point
+
+In C:
+
+```c
+"RAJU"
+```
+
+and
+
+```c
+'R'
+```
+
+are different.
+
+```text
+'R'     → character
+"RAJU"  → string
+```
+
+A character uses single quotes.
+
+A string uses double quotes.
+
+---
+
+# How a String is Stored in Memory
+
+Consider:
+
+```c
+char name[] = "RAJU";
+```
+
+Although `"RAJU"` contains 4 visible characters, the array actually contains 5 characters:
+
+```text
+R   A   J   U   \0
+```
+
+Memory representation:
+
+```text
+Index
+  0    1    2    3    4
+
+  R    A    J    U   \0
+```
+
+The `'\0'` occupies one byte.
+
+Therefore:
+
+```text
+"RAJU" → 4 characters + 1 null character
+       → 5 bytes
+```
+
+---
+
+# Null Character `'\0'`
+
+The null character is one of the most important concepts in C strings.
+
+```c
+'\0'
+```
+
+Its value is:
+
+```text
+0
+```
+
+It marks the end of a string.
+
+Example:
+
+```c
+char name[] = {'R', 'A', 'J', 'U', '\0'};
+```
+
+Without `'\0'`, C does not know where the string ends.
+
+For example:
+
+```c
+char name[4] = {'R', 'A', 'J', 'U'};
+```
+
+This is a character array, but it is not a properly null-terminated C string.
+
+---
+
+# String Declaration
+
+Syntax:
+
+```c
+char string_name[size];
+```
+
+Example:
+
+```c
+char name[20];
+```
+
+This creates a character array capable of storing up to 19 characters as a C string, because one position is required for `'\0'`.
+
+---
+
+# String Initialization
+
+## 1. Character-by-Character Initialization
+
+```c
+char name[5] = {'R', 'A', 'J', 'U', '\0'};
+```
+
+---
+
+## 2. String Literal Initialization
+
+```c
+char name[] = "RAJU";
+```
+
+The compiler automatically adds:
+
+```text
+'\0'
+```
+
+So internally:
+
+```text
+R A J U \0
+```
+
+---
+
+## 3. Specifying the Size
+
+```c
+char name[5] = "RAJU";
+```
+
+This is valid because:
+
+```text
+R A J U \0
+```
+
+requires 5 characters.
+
+---
+
+## 4. Extra Space
+
+```c
+char name[10] = "RAJU";
+```
+
+Memory contains:
+
+```text
+R A J U \0 0 0 0 0 0
+```
+
+The remaining elements are initialized to zero.
+
+---
+
+# String Size vs String Length
+
+This is a very important concept.
+
+Consider:
+
+```c
+char name[10] = "RAJU";
+```
+
+Array size:
+
+```text
+10
+```
+
+String length:
+
+```text
+4
+```
+
+Memory used by the actual string:
+
+```text
+4 characters + '\0' = 5 bytes
+```
+
+So:
+
+```text
+Array size  = 10
+String length = 4
+```
+
+---
+
+# String Length
+
+The length of a string is the number of characters before `'\0'`.
+
+Example:
+
+```text
+RAJU
+```
+
+Length:
+
+```text
+4
+```
+
+The null character is not counted as part of the string length.
+
+Using:
+
+```c
+strlen("RAJU")
+```
+
+returns:
+
+```text
+4
+```
+
+---
+
+# String Indexing
+
+Strings are character arrays, so each character has an index.
+
+Example:
+
+```c
+char name[] = "RAJU";
+```
+
+Representation:
+
+```text
+Index     0   1   2   3   4
+          R   A   J   U  \0
+```
+
+Access:
+
+```c
+name[0] → R
+name[1] → A
+name[2] → J
+name[3] → U
+```
+
+The last valid character of the string is:
+
+```c
+name[3]
+```
+
+The null character is:
+
+```c
+name[4]
+```
+
+---
+
+# Accessing Individual Characters
+
+Example:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    char name[] = "RAJU";
+
+    printf("%c\n", name[0]);
+    printf("%c\n", name[1]);
+    printf("%c\n", name[2]);
+    printf("%c\n", name[3]);
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+R
+A
+J
+U
+```
+
+---
+
+# Traversing a String
+
+Traversal means visiting each character one by one.
+
+Example:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    char name[] = "RAJU";
+
+    for(int i = 0; name[i] != '\0'; i++)
+    {
+        printf("%c ", name[i]);
+    }
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+R A J U
+```
+
+The loop continues until:
+
+```c
+name[i] == '\0'
+```
+
+---
+
+# Another Way to Traverse a String
+
+We can use `strlen()`:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char name[] = "RAJU";
+
+    for(int i = 0; i < strlen(name); i++)
+    {
+        printf("%c ", name[i]);
+    }
+
+    return 0;
+}
+```
+
+However, for basic string traversal, this is usually preferred:
+
+```c
+for(int i = 0; name[i] != '\0'; i++)
+```
+
+---
+
+# Taking String Input
+
+There are several ways to take string input.
+
+The most common are:
+
+```text
+scanf()
+fgets()
+```
+
+---
+
+# Using scanf()
+
+```c
+char name[20];
+
+scanf("%s", name);
+```
+
+Notice:
+
+```c
+scanf("%s", name);
+```
+
+not:
+
+```c
+scanf("%s", &name);
+```
+
+For `%s`, the array name already provides the address of the first character.
+
+Example:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    char name[20];
+
+    scanf("%s", name);
+
+    printf("%s", name);
+
+    return 0;
+}
+```
+
+Input:
+
+```text
+RAJU
+```
+
+Output:
+
+```text
+RAJU
+```
+
+---
+
+# Important Limitation of scanf("%s")
+
+`scanf("%s", name)` stops reading when it encounters whitespace.
+
+Suppose input is:
+
+```text
+Raju Malekar
+```
+
+It will read only:
+
+```text
+Raju
+```
+
+because the space separates two input tokens.
+
+---
+
+# Using fgets()
+
+For reading a complete line, `fgets()` is generally safer and more appropriate.
+
+```c
+char name[50];
+
+fgets(name, sizeof(name), stdin);
+```
+
+Example:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    char name[50];
+
+    printf("Enter your name: ");
+
+    fgets(name, sizeof(name), stdin);
+
+    printf("Your name is %s", name);
+
+    return 0;
+}
+```
+
+Input:
+
+```text
+Raju Malekar
+```
+
+Output:
+
+```text
+Your name is Raju Malekar
+```
+
+`fgets()` can read spaces.
+
+---
+
+# scanf() vs fgets()
+
+| `scanf("%s")`                    | `fgets()`                 |
+| -------------------------------- | ------------------------- |
+| Reads a word                     | Reads a line              |
+| Stops at whitespace              | Can read spaces           |
+| Simple for single words          | Better for complete lines |
+| Can be risky without width limit | Helps limit input size    |
+
+For example:
+
+```c
+scanf("%19s", name);
+```
+
+limits input to 19 characters when `name` has size 20.
+
+---
+
+# Printing a String
+
+Use `%s` with `printf()`.
+
+```c
+char name[] = "RAJU";
+
+printf("%s", name);
+```
+
+Output:
+
+```text
+RAJU
+```
+
+Remember:
+
+```text
+%c → character
+%s → string
+```
+
+Example:
+
+```c
+printf("%c", name[0]);
+```
+
+prints:
+
+```text
+R
+```
+
+while:
+
+```c
+printf("%s", name);
+```
+
+prints:
+
+```text
+RAJU
+```
+
+---
+
+# String Functions
+
+C provides several useful string functions through:
+
+```c
+#include <string.h>
+```
+
+Important functions:
+
+```text
+strlen()
+strcpy()
+strncpy()
+strcat()
+strncat()
+strcmp()
+strncmp()
+strchr()
+strstr()
+```
+
+---
+
+# 1. strlen()
+
+`strlen()` finds the length of a string.
+
+Syntax:
+
+```c
+strlen(string);
+```
+
+Example:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char name[] = "RAJU";
+
+    printf("%zu", strlen(name));
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+4
+```
+
+Important:
+
+`strlen()` does not count `'\0'`.
+
+---
+
+# 2. strcpy()
+
+`strcpy()` copies one string into another.
+
+Syntax:
+
+```c
+strcpy(destination, source);
+```
+
+Example:
+
+```c
+char source[] = "RAJU";
+char destination[20];
+
+strcpy(destination, source);
+```
+
+Now:
+
+```text
+destination → RAJU
+```
+
+Complete example:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char source[] = "RAJU";
+    char destination[20];
+
+    strcpy(destination, source);
+
+    printf("%s", destination);
+
+    return 0;
+}
+```
+
+---
+
+# 3. strcat()
+
+`strcat()` joins two strings.
+
+Syntax:
+
+```c
+strcat(destination, source);
+```
+
+Example:
+
+```c
+char first[20] = "Raju ";
+char last[] = "Malekar";
+
+strcat(first, last);
+```
+
+Result:
+
+```text
+Raju Malekar
+```
+
+The destination array must have enough space for the combined string and `'\0'`.
+
+---
+
+# 4. strcmp()
+
+`strcmp()` compares two strings.
+
+Syntax:
+
+```c
+strcmp(string1, string2);
+```
+
+Example:
+
+```c
+strcmp("abc", "abc");
+```
+
+returns:
+
+```text
+0
+```
+
+If the strings are different, the result is nonzero.
+
+Example:
+
+```c
+if(strcmp(name, "RAJU") == 0)
+{
+    printf("Same");
+}
+```
+
+Do not compare strings using:
+
+```c
+if(name == "RAJU")
+```
+
+For C strings, use `strcmp()`.
+
+---
+
+# 5. strncpy()
+
+`strncpy()` copies a specified number of characters.
+
+```c
+strncpy(destination, source, n);
+```
+
+Example:
+
+```c
+char source[] = "RAJU";
+char destination[20];
+
+strncpy(destination, source, 4);
+```
+
+When using `strncpy()`, be careful about null termination; it does not always append `'\0'` when the source length is at least `n`.
+
+---
+
+# 6. strncat()
+
+`strncat()` appends a specified number of characters.
+
+```c
+strncat(destination, source, n);
+```
+
+The destination still needs enough space for the resulting string and terminating `'\0'`.
+
+---
+
+# 7. strchr()
+
+`strchr()` searches for the first occurrence of a character.
+
+Example:
+
+```c
+char name[] = "RAJU";
+
+char *result = strchr(name, 'J');
+```
+
+It finds:
+
+```text
+J
+```
+
+---
+
+# 8. strstr()
+
+`strstr()` searches for a substring inside another string.
+
+Example:
+
+```c
+char text[] = "I love C programming";
+
+char *result = strstr(text, "C");
+```
+
+It finds the substring:
+
+```text
+C
+```
+
+---
+
+# String Copy vs Assignment
+
+This is an important C concept.
+
+You cannot normally copy strings using:
+
+```c
+name2 = name1;
+```
+
+For character arrays, use:
+
+```c
+strcpy(name2, name1);
+```
+
+Example:
+
+```c
+char name1[] = "RAJU";
+char name2[20];
+
+strcpy(name2, name1);
+```
+
+---
+
+# String Comparison
+
+Incorrect:
+
+```c
+if(name1 == name2)
+```
+
+This does not compare the contents of two character arrays.
+
+Correct:
+
+```c
+if(strcmp(name1, name2) == 0)
+{
+    printf("Strings are equal");
+}
+```
+
+---
+
+# Character Array vs String
+
+These terms are related but not exactly identical.
+
+A character array:
+
+```c
+char arr[4] = {'R', 'A', 'J', 'U'};
+```
+
+does not contain a null terminator.
+
+A C string:
+
+```c
+char arr[5] = {'R', 'A', 'J', 'U', '\0'};
+```
+
+does contain a null terminator.
+
+Therefore:
+
+```text
+Every string is stored in a character array,
+but not every character array is a string.
+```
+
+This is a very important interview point.
+
+---
+
+# String and Pointer Relationship
+
+Strings are closely related to pointers.
+
+Example:
+
+```c
+char name[] = "RAJU";
+```
+
+The array name:
+
+```c
+name
+```
+
+usually represents the address of its first element when used in an expression.
+
+So:
+
+```c
+name
+```
+
+is closely related to:
+
+```c
+&name[0]
+```
+
+For example:
+
+```c
+printf("%c", *name);
+```
+
+prints:
+
+```text
+R
+```
+
+because:
+
+```text
+name → address of R
+*name → R
+```
+
+---
+
+# Character Pointer and String Literal
+
+You may also see:
+
+```c
+char *name = "RAJU";
+```
+
+This is different from:
+
+```c
+char name[] = "RAJU";
+```
+
+With:
+
+```c
+char name[] = "RAJU";
+```
+
+a modifiable character array is created.
+
+With:
+
+```c
+char *name = "RAJU";
+```
+
+`name` points to a string literal, which must not be modified.
+
+Therefore, do not do:
+
+```c
+name[0] = 'X';
+```
+
+when `name` points to a string literal.
+
+---
+
+# Array of Strings
+
+We can store multiple strings using a 2D character array.
+
+Example:
+
+```c
+char names[3][20] = {
+    "Raju",
+    "Amit",
+    "Rahul"
+};
+```
+
+Representation:
+
+```text
+Row 0 → R a j u \0
+Row 1 → A m i t \0
+Row 2 → R a h u l \0
+```
+
+Access:
+
+```c
+names[0] → "Raju"
+names[1] → "Amit"
+names[2] → "Rahul"
+```
+
+This is essentially a 2D array of characters.
+
+---
+
+# Traversing an Array of Strings
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    char names[3][20] = {
+        "Raju",
+        "Amit",
+        "Rahul"
+    };
+
+    for(int i = 0; i < 3; i++)
+    {
+        printf("%s\n", names[i]);
+    }
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+Raju
+Amit
+Rahul
+```
+
+---
+
+# Passing a String to a Function
+
+A string can be passed to a function using a character array parameter.
+
+Example:
+
+```c
+void display(char str[])
+{
+    printf("%s", str);
+}
+```
+
+Call:
+
+```c
+char name[] = "RAJU";
+
+display(name);
+```
+
+Complete example:
+
+```c
+#include <stdio.h>
+
+void display(char str[])
+{
+    printf("%s", str);
+}
+
+int main()
+{
+    char name[] = "RAJU";
+
+    display(name);
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+RAJU
+```
+
+---
+
+# String Function Using Pointer
+
+The same function can also be written as:
+
+```c
+void display(char *str)
+{
+    printf("%s", str);
+}
+```
+
+Call:
+
+```c
+display(name);
+```
+
+For a function parameter, these are effectively equivalent forms for receiving a string:
+
+```c
+void display(char str[])
+```
+
+and:
+
+```c
+void display(char *str)
+```
+
+---
+
+# Passing a String to a Function and Modifying It
+
+Example:
+
+```c
+void change(char str[])
+{
+    str[0] = 'X';
+}
+```
+
+Call:
+
+```c
+char name[] = "RAJU";
+
+change(name);
+
+printf("%s", name);
+```
+
+Output:
+
+```text
+XAJU
+```
+
+The original array is modified because the function receives access to the same character array.
+
+---
+
+# Function to Find String Length Without strlen()
+
+We can create our own function:
+
+```c
+int length(char str[])
+{
+    int i = 0;
+
+    while(str[i] != '\0')
+    {
+        i++;
+    }
+
+    return i;
+}
+```
+
+Call:
+
+```c
+char name[] = "RAJU";
+
+int result = length(name);
+```
+
+Result:
+
+```text
+4
+```
+
+---
+
+# Function to Copy String Without strcpy()
+
+```c
+void copyString(char destination[], char source[])
+{
+    int i = 0;
+
+    while(source[i] != '\0')
+    {
+        destination[i] = source[i];
+        i++;
+    }
+
+    destination[i] = '\0';
+}
+```
+
+Call:
+
+```c
+char source[] = "RAJU";
+char destination[20];
+
+copyString(destination, source);
+```
+
+---
+
+# Function to Compare Strings Without strcmp()
+
+```c
+int compare(char str1[], char str2[])
+{
+    int i = 0;
+
+    while(str1[i] != '\0' && str2[i] != '\0')
+    {
+        if(str1[i] != str2[i])
+        {
+            return 1;
+        }
+
+        i++;
+    }
+
+    if(str1[i] == str2[i])
+    {
+        return 0;
+    }
+
+    return 1;
+}
+```
+
+Call:
+
+```c
+if(compare("RAJU", "RAJU") == 0)
+{
+    printf("Equal");
+}
+```
+
+---
+
+# Common String Operations
+
+Strings are commonly used for:
+
+* Finding length
+* Copying
+* Concatenation
+* Comparison
+* Searching
+* Reversing
+* Converting case
+* Counting characters
+* Counting vowels
+* Counting consonants
+* Counting spaces
+* Removing spaces
+* Checking palindrome
+* Checking anagram
+* Searching for a substring
+
+---
+
+# Common String Programs
+
+Important programs to practice:
+
+```text
+1. Find string length
+2. Copy a string
+3. Compare two strings
+4. Concatenate two strings
+5. Reverse a string
+6. Check palindrome
+7. Count vowels
+8. Count consonants
+9. Count digits
+10. Count spaces
+11. Convert lowercase to uppercase
+12. Convert uppercase to lowercase
+13. Count frequency of characters
+14. Remove spaces
+15. Find a character
+16. Find a substring
+17. Sort strings
+18. Array of strings
+```
+
+---
+
+# String Reverse
+
+Example:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char str[] = "RAJU";
+
+    int length = strlen(str);
+
+    for(int i = length - 1; i >= 0; i--)
+    {
+        printf("%c", str[i]);
+    }
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+UJAR
+```
+
+---
+
+# Palindrome String
+
+A palindrome reads the same forward and backward.
+
+Examples:
+
+```text
+MADAM
+LEVEL
+RADAR
+```
+
+Example:
+
+```c
+char str[] = "MADAM";
+```
+
+Forward:
+
+```text
+MADAM
+```
+
+Backward:
+
+```text
+MADAM
+```
+
+Therefore it is a palindrome.
+
+---
+
+# String Input with Spaces
+
+For:
+
+```text
+Raju Malekar
+```
+
+This will not read the complete input:
+
+```c
+scanf("%s", name);
+```
+
+Use:
+
+```c
+fgets(name, sizeof(name), stdin);
+```
+
+This can read:
+
+```text
+Raju Malekar
+```
+
+including the space.
+
+---
+
+# Common Mistakes
+
+### 1. Forgetting `'\0'`
+
+Incorrect:
+
+```c
+char name[4] = {'R', 'A', 'J', 'U'};
+```
+
+This is not a null-terminated C string.
+
+Correct:
+
+```c
+char name[5] = {'R', 'A', 'J', 'U', '\0'};
+```
+
+---
+
+### 2. Using `%c` for a String
+
+Incorrect:
+
+```c
+printf("%c", name);
+```
+
+Correct:
+
+```c
+printf("%s", name);
+```
+
+---
+
+### 3. Using `%s` for One Character
+
+Incorrect:
+
+```c
+char ch = 'A';
+
+printf("%s", ch);
+```
+
+Correct:
+
+```c
+printf("%c", ch);
+```
+
+---
+
+### 4. Comparing Strings with `==`
+
+Incorrect:
+
+```c
+if(str1 == str2)
+```
+
+Correct:
+
+```c
+if(strcmp(str1, str2) == 0)
+```
+
+---
+
+### 5. Copying Strings with `=`
+
+Incorrect:
+
+```c
+str2 = str1;
+```
+
+Correct:
+
+```c
+strcpy(str2, str1);
+```
+
+---
+
+### 6. Insufficient Array Size
+
+Incorrect:
+
+```c
+char name[4] = "RAJU";
+```
+
+Because `"RAJU"` requires:
+
+```text
+4 characters + '\0'
+= 5 characters
+```
+
+Correct:
+
+```c
+char name[5] = "RAJU";
+```
+
+---
+
+### 7. Buffer Overflow
+
+Suppose:
+
+```c
+char name[5];
+```
+
+You cannot safely store:
+
+```text
+RAJUM
+```
+
+as a C string because it needs:
+
+```text
+5 characters + '\0'
+= 6 bytes
+```
+
+Always make sure the array has enough space.
+
+---
+
+# Advantages of Strings
+
+* Easy to store text.
+* Easy to process using loops.
+* Many library functions are available.
+* Can be passed to functions.
+* Efficient for handling character data.
+* Foundation for text processing and many applications.
+
+---
+
+# Disadvantages of Strings
+
+* C does not have a built-in string data type.
+* Programmer must manage memory carefully.
+* Fixed-size character arrays can overflow.
+* Strings require a terminating `'\0'`.
+* String operations can be error-prone.
+* Some operations require library functions such as `strcpy()`, `strcmp()`, and `strcat()`.
+
+---
+
+# Applications of Strings
+
+Strings are widely used in:
+
+* Names
+* Passwords
+* User input
+* File names
+* Addresses
+* Text processing
+* Command-line arguments
+* Searching
+* Data validation
+* Communication protocols
+* Embedded systems
+* Serial communication
+* Web applications
+* File handling
+
+---
+
+# Important String Format Specifiers
+
+| Format Specifier | Used For              |
+| ---------------- | --------------------- |
+| `%c`             | Single character      |
+| `%s`             | String                |
+| `%d`             | Integer               |
+| `%f`             | Float                 |
+| `%lf`            | Double with `scanf()` |
+
+Example:
+
+```c
+char name[] = "RAJU";
+char ch = 'R';
+
+printf("%s\n", name);
+printf("%c\n", ch);
+```
+
+---
+
+# Important Header File
+
+String library functions are available through:
+
+```c
+#include <string.h>
+```
+
+Common functions:
+
+```text
+strlen()
+strcpy()
+strncpy()
+strcat()
+strncat()
+strcmp()
+strncmp()
+strchr()
+strstr()
+```
+
+---
+
+# Difference Between Character and String
+
+| Character            | String                          |
+| -------------------- | ------------------------------- |
+| Stores one character | Stores multiple characters      |
+| Uses `char`          | Uses `char` array               |
+| Uses single quotes   | Uses double quotes              |
+| Example: `'A'`       | Example: `"RAJU"`               |
+| Usually 1 byte       | Multiple bytes including `'\0'` |
+| `%c`                 | `%s`                            |
+
+---
+
+# Difference Between Character Array and String
+
+| Character Array               | String                          |
+| ----------------------------- | ------------------------------- |
+| Array of `char`               | Null-terminated character array |
+| May or may not contain `'\0'` | Must contain `'\0'`             |
+| Can store raw characters      | Used to represent text          |
+| Example: `{'A','B','C'}`      | Example: `"ABC"`                |
+
+---
+
+# Interview Questions
+
+* What is a string in C?
+* Does C have a string data type?
+* How are strings represented in C?
+* What is the null character?
+* Why is `'\0'` required?
+* What is the difference between a character and a string?
+* What is the difference between a character array and a string?
+* What is the difference between string length and array size?
+* How is a string stored in memory?
+* Why does `"RAJU"` require 5 bytes?
+* What is the difference between `%c` and `%s`?
+* How do you take string input?
+* What is the difference between `scanf()` and `fgets()`?
+* Why does `scanf("%s")` stop at whitespace?
+* What is `strlen()`?
+* What is `strcpy()`?
+* What is `strcat()`?
+* What is `strcmp()`?
+* Why can't we compare strings using `==`?
+* Why can't we copy strings using `=`?
+* How are strings related to pointers?
+* What is the difference between `char str[]` and `char *str`?
+* How do you pass a string to a function?
+* How do you reverse a string?
+* How do you check whether a string is a palindrome?
+* How do you store multiple strings?
+* What is an array of strings?
+* What happens if `'\0'` is missing?
+* What is buffer overflow?
+
+---
+
+# Quick Syntax Reference
+
+### Declare a string
+
+```c
+char name[20];
+```
+
+### Initialize
+
+```c
+char name[] = "RAJU";
+```
+
+### Character-by-character
+
+```c
+char name[5] = {'R', 'A', 'J', 'U', '\0'};
+```
+
+### Input
+
+```c
+scanf("%s", name);
+```
+
+### Input with spaces
+
+```c
+fgets(name, sizeof(name), stdin);
+```
+
+### Output
+
+```c
+printf("%s", name);
+```
+
+### Character access
+
+```c
+name[0]
+```
+
+### Traversal
+
+```c
+for(int i = 0; name[i] != '\0'; i++)
+{
+    printf("%c", name[i]);
+}
+```
+
+### Length
+
+```c
+strlen(name);
+```
+
+### Copy
+
+```c
+strcpy(destination, source);
+```
+
+### Concatenate
+
+```c
+strcat(destination, source);
+```
+
+### Compare
+
+```c
+strcmp(str1, str2);
+```
+
+### Pass to function
+
+```c
+void display(char str[])
+{
+    printf("%s", str);
+}
+```
+
+### Call function
+
+```c
+display(name);
+```
+
+---
+
+# Summary
+
+* A string in C is a sequence of characters terminated by `'\0'`.
+* C does not have a separate built-in string data type.
+* Strings are stored using character arrays.
+* `"RAJU"` contains 4 visible characters but requires 5 bytes because of `'\0'`.
+* `%c` is used for a character.
+* `%s` is used for a string.
+* `scanf("%s", str)` reads a word, while `fgets()` can read a complete line.
+* `strlen()` finds string length.
+* `strcpy()` copies strings.
+* `strcat()` joins strings.
+* `strcmp()` compares strings.
+* Strings can be passed to functions using `char str[]` or `char *str`.
+* A character array is not necessarily a string; it must be null-terminated to be a C string.
+* Strings are closely related to arrays and pointers.
+* Understanding strings is essential before moving to pointers, dynamic memory, structures, and file handling.

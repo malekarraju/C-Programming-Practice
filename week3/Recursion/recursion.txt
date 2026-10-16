@@ -1,0 +1,202 @@
+*********Recursion in C (Complete Guide)*************************
+
+Recursion is one of the most important concepts in C programming. It allows a function to call itself until a specific condition
+is met.
+
+**Definition**
+Recursion is a programming technique in which a function calls itself repeatedly to solve a problem by breaking it into smaller 
+subproblems.
+
+/////Syntax
+return_type function_name(parameters)
+{
+    if(base_condition)
+    {
+        return value;
+    }
+
+    // Recursive call
+    function_name(arguments);
+}
+
+
+Components of Recursion
+Every recursive function has two essential parts.
+
+1. Base Case
+
+The base case stops the recursion.
+Without a base case, the function keeps calling itself forever.
+
+Example
+if(n == 0)
+    return;
+
+2. Recursive Call
+
+The function calls itself with a smaller or modified input.
+fun(n - 1);
+
+How Recursion Works
+
+Example
+#include<stdio.h>
+
+int main()
+{
+    fun(5);
+
+    return 0;
+}
+void fun(int n)
+{
+    if(n == 0)
+        return;
+
+    printf("%d\n", n);
+
+    fun(n - 1);
+}
+
+Output
+
+5
+4
+3
+2
+1
+
+
+Step-by-Step Execution
+
+Call fun(5)
+
+Function calls
+fun(5)
+   |
+   ---> fun(4)
+            |
+            ---> fun(3)
+                     |
+                     ---> fun(2)
+                              |
+                              ---> fun(1)
+                                       |
+                                       ---> fun(0)
+
+At fun(0)
+
+Base condition becomes true.
+Now functions return one by one.
+
+fun(0)
+↑
+fun(1)
+↑
+fun(2)
+↑
+fun(3)
+↑
+fun(4)
+↑
+fun(5)
+
+This is called Backtracking.//////////////**********
+
+------------------------------------------------------------------------------------
+
+## Stack Memory
+
+Each recursive call creates a new stack frame.
+
+Example
+main()
+↓
+fun(5)
+↓
+fun(4)
+↓
+fun(3)
+↓
+fun(2)
+↓
+fun(1)
+↓
+fun(0)
+
+After reaching the base case
+
+fun(0) removed
+↓
+fun(1) removed
+↓
+fun(2) removed
+↓
+fun(3)
+↓
+fun(4)
+↓
+fun(5)
+↓
+main()
+
+-----------------------------------------------------------------------------------------------------------
+
+Every function call has its own:
+
+Local variables
+Parameters
+Return address
+
+---------------------------------------------------------------------------------------------------------
+//WAP
+Example 1: Print 1 to N
+#include<stdio.h>
+
+void print(int n);
+int main()
+{
+    print(5);
+}
+void print(int n)
+{
+    if(n == 0)
+        return;
+
+    print(n - 1);
+
+    printf("%d ", n);
+}
+
+Output
+
+1 2 3 4 5
+
+-----------------------------------------------------------------------------------------------------
+
+##Interview Questions
+
+What is recursion?
+Why is a base case necessary?
+What is stack overflow?
+Explain tail recursion.
+What is indirect recursion?
+Difference between recursion and iteration.
+Why is recursive Fibonacci inefficient?
+Can every recursive algorithm be converted into a loop? (Yes, though the loop may require an explicit stack to simulate 
+recursive calls.)
+What happens in memory during recursive calls?
+When should recursion be preferred over loops?
+
+---------------------------------------------------------------------------------------------------------------------
+
+##Summary
+
+Recursion is when a function calls itself.
+Every recursive function must have:
+A base case (stopping condition).
+A recursive call that moves toward the base case.
+Each call gets its own stack frame.
+Once the base case is reached, functions return in reverse order (backtracking).
+Recursion is elegant for problems like factorial, Fibonacci, tree traversal, divide-and-conquer, and backtracking, but loops
+are generally more memory-efficient for simple repetition.

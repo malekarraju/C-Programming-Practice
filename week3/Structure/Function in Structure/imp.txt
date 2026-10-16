@@ -1,0 +1,26 @@
+Structures with Functions — Key Points
+
+* Structure passed by value → function gets a copy; changes do not affect the original structure.
+* Structure passed by pointer → function gets the address; changes can affect the original structure.
+* Use `.` to access members through a structure variable.
+* Use `->` to access members through a structure pointer.
+* `st->name` is equivalent to `(*st).name`.
+* Structure passed by value → `display(stud)`.
+* Structure passed by pointer → `display(&stud)`.
+* Return-by-value → assign the returned structure: `stud = user_input(stud);`.
+* Calling `user_input(stud);` without assignment discards the returned structure.
+* `scanf("%d", &stud->roll)` needs `&` because `scanf()` requires the variable's address.
+* `scanf("%f", &stud->per)` also needs `&`.
+* `scanf("%c", &stud->sex)` needs `&` because `%c` also writes into a variable.
+* `%c` does not skip whitespace or newline characters.
+* After numeric `scanf()`, a leftover `\n` can be consumed by the next `%c`.
+* Use `getchar()` or a leading space in `" %c"` to handle leftover whitespace.
+* `fgets()` can read and store the newline `\n`; remove it when necessary.
+* `strcpy()` does not check destination array size.
+* Destination array must have enough space for the string plus `'\0'`.
+* `strncpy()` can limit the number of characters copied, but manual `'\0'` termination may be required.
+* Function accepting individual members → useful when only a few members are needed.
+* Function accepting a complete structure by value → useful for read-only operations.
+* Function accepting a structure pointer → efficient and allows modification.
+* Function returning a structure → returns a structure value; caller must store it if needed.
+* Function modifying through a pointer → directly changes the caller's original structure.

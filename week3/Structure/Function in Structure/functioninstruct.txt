@@ -1,0 +1,194 @@
+# FUNCTION IN STRUCTURE IN C
+
+1. INTRODUCTION
+A function in a structure means using functions along with a structure to perform operations on the
+data stored in the structure.
+In C, a structure can contain variables as its members, but it cannot directly contain a function
+as a member like a class in C++.
+
+However, we can create functions that work with structure variables.
+
+Functions can receive a structure as an argument, return a structure,
+or access structure members using a structure variable.
+---
+
+2. WHY USE FUNCTIONS WITH STRUCTURES?
+Functions are used with structures to:
+• Perform operations on structure data
+• Make the program modular
+• Reduce code repetition
+• Improve code readability
+• Make large programs easier to manage
+• Separate data from operations
+---
+
+3. BASIC SYNTAX
+
+struct StructureName
+{
+data_type member1;
+data_type member2;
+};
+
+return_type function_name(struct StructureName variable)
+{
+// statements
+}
+---
+
+4. SIMPLE EXAMPLE
+
+#include <stdio.h>
+
+struct Student
+{
+int roll;
+char name[20];
+float percentage;
+};
+
+void display(struct Student s)
+{
+printf("Roll No: %d\n", s.roll);
+printf("Name: %s\n", s.name);
+printf("Percentage: %.2f\n", s.percentage);
+}
+
+int main()
+{
+struct Student s = {1, "Raju", 89.50};
+
+display(s);
+
+return 0;
+}
+```
+
+5. FUNCTION WITH STRUCTURE AS ARGUMENT
+A structure variable can be passed to a function as an argument.
+Example:
+
+void display(struct Student s);
+
+Here:
+
+struct Student
+→ Structure data type
+
+s
+→ Structure variable received by the function
+---
+
+6. FUNCTION RETURNING STRUCTURE
+A function can also return a structure.
+
+Example:
+struct Student getStudent()
+{
+struct Student s;
+
+s.roll = 1;
+s.percentage = 89.50;
+
+return s;
+
+}
+Here, the function returns a complete structure variable.
+```
+
+7. POINTER TO STRUCTURE IN FUNCTION
+A pointer to a structure can be passed to a function.
+
+Example:
+
+void display(struct Student *s)
+{
+printf("Roll No: %d\n", s->roll);
+}
+
+The arrow operator (->) is used to access structure members through a structure pointer.
+```
+
+8. STRUCTURE VARIABLE VS STRUCTURE POINTER
+
+Structure variable:
+s.roll
+
+Structure pointer:
+s->roll
+
+Example:
+struct Student s;
+s.roll = 10;
+struct Student *ptr;
+ptr = &s;
+ptr->roll = 10;
+```
+
+9. TYPES OF FUNCTIONS USED WITH STRUCTURES
+1. Function accepting individual structure members
+2. Function accepting a complete structure
+3. Function accepting a pointer to structure
+4. Function returning a structure 
+5. Function modifying structure data using a pointer
+6. IMPORTANT POINT
+---
+
+C does NOT allow a function to be declared directly inside a structure.
+
+Incorrect:
+struct Student
+{
+int roll;
+void display()   // Not allowed in C
+{
+}
+};
+
+Correct:
+struct Student
+{
+int roll;
+};
+void display(struct Student s)
+{
+printf("%d", s.roll);
+}
+```
+
+11. STRUCTURE + FUNCTION CONCEPT
+Structure
+↓
+Stores related data
+
+Function
+↓
+Performs operations on that data
+
+Structure + Function
+↓
+Organized and modular program
+```
+
+12. KEY POINTS TO REMEMBER
+• C structures store data members.
+• Functions are declared outside the structure.
+• A structure can be passed to a function.
+• A structure can be returned from a function.
+• A pointer to a structure can be passed to a function.
+• Use . with a structure variable.
+• Use -> with a structure pointer.
+• Functions make structure-based programs modular and reusable.
+```
+
+13. TOPICS TO PRACTICE NEXT
+1. Passing structure to function
+2. Passing structure pointer to function
+3. Returning structure from function
+4. Array of structures with functions
+5. Nested structure with functions
+6. Structure with string and functions
+7. Structure pointer and functions
+8. Structure modification using functions
+9. Multiple structures with functions
+10. Practical Student Management Program

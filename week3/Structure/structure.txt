@@ -1,0 +1,632 @@
+# **************** Structures in C (Complete Guide) ****************
+
+Structures are one of the important concepts in C programming.
+They allow us to store different types of data under a single variable name.
+
+---
+
+## Definition
+A structure is a user-defined data type that groups variables of different data types together.
+
+Example:
+```c
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+```
+
+Here, one structure contains:
+```text
+rollNo → int
+name   → char array
+marks  → float
+```
+---
+## Why Do We Need Structures?
+Suppose we want to store information about a student.
+
+Without structure:
+```c
+int rollNo;
+char name[20];
+float marks;
+```
+For many students, managing separate variables becomes difficult.
+
+Using a structure:
+```c
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+```
+Now all information about one student can be stored together.
+---
+
+## Characteristics of Structures
+* User-defined data type.
+* Can store different data types.
+* Groups related data under one name.
+* Each member has its own name.
+* Members are accessed using the `.` operator.
+* Can contain arrays.
+* Can contain another structure.
+* Can be used with pointers.
+* Can be used to create arrays of structures.
+* Useful for representing real-world records.
+---
+
+# Structure Syntax
+```c
+struct structure_name
+{
+    data_type member1;
+    data_type member2;
+    data_type member3;
+};
+```
+Example:
+```c
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+```
+---
+# Structure Variable
+After defining a structure, we can create its variable.
+```c
+struct Student s1;
+```
+Here:
+```text
+struct Student → structure data type
+s1             → structure variable
+```
+---
+# Accessing Structure Members
+The dot `.` operator is used to access structure members.
+Example:
+```c
+s1.rollNo = 101;
+s1.marks = 85.5;
+```
+For the name:
+```c
+strcpy(s1.name, "Raju");
+```
+---
+# Complete Example
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+
+int main()
+{
+    struct Student s1;
+
+    s1.rollNo = 101;
+    strcpy(s1.name, "Raju");
+    s1.marks = 85.5;
+
+    printf("Roll No = %d\n", s1.rollNo);
+    printf("Name = %s\n", s1.name);
+    printf("Marks = %.2f\n", s1.marks);
+
+    return 0;
+}
+```
+Output:
+```
+Roll No = 101
+Name = Raju
+Marks = 85.50
+```
+---
+# Structure Initialization
+A structure can be initialized while declaring it.
+```c
+struct Student s1 = {101, "Raju", 85.5};
+```
+Example:
+```c
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+
+int main()
+{
+    struct Student s1 = {101, "Raju", 85.5};
+
+    printf("%d\n", s1.rollNo);
+    printf("%s\n", s1.name);
+    printf("%.2f\n", s1.marks);
+
+    return 0;
+}
+```
+---
+# Designated Initialization
+Members can also be initialized using their names.
+```c
+struct Student s1 =
+{
+    .rollNo = 101,
+    .name = "Raju",
+    .marks = 85.5
+};
+```
+This is supported in C99 and later.
+---
+# Taking Input in Structure
+```c
+#include <stdio.h>
+
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+
+int main()
+{
+    struct Student s1;
+
+    printf("Enter Roll No: ");
+    scanf("%d", &s1.rollNo);
+
+    printf("Enter Name: ");
+    scanf("%s", s1.name);
+
+    printf("Enter Marks: ");
+    scanf("%f", &s1.marks);
+
+    printf("\nRoll No = %d", s1.rollNo);
+    printf("\nName = %s", s1.name);
+    printf("\nMarks = %.2f", s1.marks);
+
+    return 0;
+}
+```
+Notice:
+```c
+scanf("%d", &s1.rollNo);
+scanf("%f", &s1.marks);
+```
+But for the character array:
+```c
+scanf("%s", s1.name);
+```
+---
+# Array of Structures
+An array can contain multiple structure variables.
+Example:
+```c
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+struct Student s[3];
+```
+Here:
+```text
+s[0] → Student 1
+s[1] → Student 2
+s[2] → Student 3
+```
+Access members:
+```c
+s[0].rollNo
+s[1].rollNo
+s[2].rollNo
+```
+---
+# Example: Array of Structures
+```c
+#include <stdio.h>
+
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+
+int main()
+{
+    struct Student s[3];
+
+    for(int i = 0; i < 3; i++)
+    {
+        printf("Enter Roll No: ");
+        scanf("%d", &s[i].rollNo);
+
+        printf("Enter Name: ");
+        scanf("%s", s[i].name);
+
+        printf("Enter Marks: ");
+        scanf("%f", &s[i].marks);
+    }
+
+    printf("\nStudent Details:\n");
+
+    for(int i = 0; i < 3; i++)
+    {
+        printf("\nRoll No = %d", s[i].rollNo);
+        printf("\nName = %s", s[i].name);
+        printf("\nMarks = %.2f\n", s[i].marks);
+    }
+
+    return 0;
+}
+```
+---
+# Nested Structure
+A structure can contain another structure.
+
+Example:
+```c
+struct Date
+{
+    int day;
+    int month;
+    int year;
+};
+struct Student
+{
+    int rollNo;
+    char name[20];
+    struct Date dob;
+};
+```
+Access:
+```c
+s1.dob.day
+s1.dob.month
+s1.dob.year
+```
+---
+# Structure with Array
+A structure can contain an array.
+```c
+struct Student
+{
+    int rollNo;
+    char name[20];
+    int marks[5];
+};
+```
+Access:
+```c
+s1.marks[0]
+s1.marks[1]
+s1.marks[2]
+```
+---
+# Pointer to Structure
+A pointer can store the address of a structure variable.
+```c
+struct Student s1;
+struct Student *ptr;
+
+ptr = &s1;
+```
+Members can be accessed using the arrow `->` operator.
+```c
+ptr->rollNo
+ptr->marks
+```
+---
+# Dot Operator vs Arrow Operator
+
+| Operator | Used With          |
+| -------- | ------------------ |
+| `.`      | Structure variable |
+| `->`     | Structure pointer  |
+
+Example:
+```c
+s1.rollNo
+```
+Structure variable.
+
+```c
+ptr->rollNo
+```
+Structure pointer.
+
+These are equivalent:
+```c
+ptr->rollNo
+```
+and
+```c
+(*ptr).rollNo
+```
+---
+# Structure Assignment
+One structure can be assigned to another structure of the same type.
+```c
+struct Student s1 = {101, "Raju", 85.5};
+struct Student s2;
+s2 = s1;
+```
+Now `s2` contains the same values as `s1`.
+
+---
+# Passing Structure to Function
+A structure can be passed to a function.
+Example:
+```c
+void display(struct Student s)
+{
+    printf("Roll No = %d", s.rollNo);
+}
+```
+Calling:
+```c
+display(s);
+```
+A copy of the structure is passed to the function.
+
+---
+# Structure with Pointer in Function
+A structure can also be passed using a pointer.
+```c
+void display(struct Student *s)
+{
+    printf("Roll No = %d", s->rollNo);
+}
+```
+Calling:
+```c
+display(&s);
+```
+
+---
+# typedef with Structure
+Normally:
+```c
+struct Student s1;
+```
+Using `typedef`:
+```c
+typedef struct
+{
+    int rollNo;
+    char name[20];
+    float marks;
+} Student;
+```
+Now we can write:
+```c
+Student s1;
+```
+instead of:
+```c
+struct Student s1;
+```
+
+---
+# Structure Memory
+Structure members are stored in memory, but the compiler may insert extra unused bytes called padding.
+Example:
+```c
+struct Student
+{
+    int rollNo;
+    char grade;
+    float marks;
+};
+```
+The actual size can be different from the simple addition of member sizes because of padding and alignment.
+Use:
+```c
+sizeof(struct Student)
+```
+to find the actual size.
+```
+to remove we use #pragama pack(1)
+---
+
+# Structure vs Array
+| Array                   | Structure                    |
+| ----------------------- | ---------------------------- |
+| Stores same data type   | Stores different data types  |
+| Accessed using index    | Accessed using member name   |
+| Example: `int arr[5]`   | Example: `struct Student`    |
+| Used for similar values | Used for related information |
+| `arr[0]`                | `s1.rollNo`                  |
+
+Example:
+```c
+int marks[5];
+```
+All elements are integers.
+Whereas:
+```c
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+```
+contains different types of data.
+---
+
+# Structure vs Union
+
+| Structure                                        | Union                                                       |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| Each member has separate memory                  | Members share the same memory                               |
+| Multiple members can store values simultaneously | Only one member is normally used at a time                  |
+| Size generally includes all members and padding  | Size is generally based on the largest member and alignment |
+| Used for records                                 | Used for memory-efficient data representation               |
+
+---
+
+# Advantages of Structures
+* Stores related information together.
+* Can store different data types.
+* Makes programs easier to organize.
+* Useful for real-world records.
+* Supports arrays of structures.
+* Supports pointers.
+* Can be passed to functions.
+* Useful for creating complex data structures.
+
+---
+
+# Disadvantages of Structures
+* Structure may require extra memory because of padding.
+* Large structures can be expensive to copy.
+* Complex structures can make programs harder to understand.
+* Direct comparison using `==` is not allowed for structures in C.
+---
+
+# Applications of Structures
+Structures are commonly used for:
+* Student records
+* Employee records
+* Bank accounts
+* Customer information
+* Product information
+* Hospital records
+* Library management
+* Payroll systems
+* File handling
+* Linked lists
+* Stacks
+* Queues
+* Trees
+* Graphs
+* Embedded systems
+---
+
+# Common Mistakes
+### 1. Forgetting `struct`
+Without `typedef`:
+```c
+struct Student s1;
+```
+Not:
+```c
+Student s1;
+```
+---
+### 2. Using the Wrong Operator
+For a structure variable:
+```c
+s1.rollNo
+```
+For a structure pointer:
+```c
+ptr->rollNo
+```
+---
+### 3. Confusing Structure Definition and Variable
+Structure definition:
+```c
+struct Student
+{
+    int rollNo;
+};
+```
+Structure variable:
+```c
+struct Student s1;
+```
+---
+### 4. Confusing Structure and Array
+Array:
+```c
+int marks[5];
+```
+Structure:
+```c
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float marks;
+};
+```
+Array stores similar data, while a structure can store different types of related data.
+---
+
+# Important Structure Programs for Practice
+* Create and display a structure
+* Take structure input from the user
+* Initialize a structure
+* Array of structures
+* Search student by roll number
+* Find student with highest marks
+* Find student with lowest marks
+* Sort students by marks
+* Pass structure to a function
+* Pass structure using pointer
+* Nested structure
+* Structure containing an array
+* Pointer to structure
+* `typedef` with structure
+* Structure and union
+* Student management system
+* Employee management system
+---
+
+# Interview Questions
+* What is a structure in C?
+* Why do we use structures?
+* What is a user-defined data type?
+* How is a structure different from an array?
+* How do you declare a structure?
+* How do you create a structure variable?
+* How are structure members accessed?
+* What is the `.` operator?
+* What is the `->` operator?
+* What is a pointer to a structure?
+* What is an array of structures?
+* What is a nested structure?
+* What is `typedef`?
+* What is structure padding?
+* What is structure alignment?
+* What is the difference between structure and union?
+* Can a structure contain an array?
+* Can a structure contain another structure?
+* Can a structure be passed to a function?
+* Can a structure be returned from a function?
+* Can two structures be compared using `==`?
+---
+
+# Summary
+* A structure is a user-defined data type.
+* It groups different types of data under one name.
+* Structure members are accessed using the `.` operator.
+* Structure pointers use the `->` operator.
+* Structures can contain arrays and other structures.
+* Multiple structures can be stored in an array.
+* Structures can be passed to functions.
+* `typedef` can simplify structure declarations.
+* Structure size can be affected by padding and alignment.
+* Structures are widely used for storing and managing related data.

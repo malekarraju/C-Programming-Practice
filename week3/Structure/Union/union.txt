@@ -1,0 +1,63 @@
+Union in C — Short Notes
+A union is a user-defined data type in C, similar to a structure, but all members share the
+same memory location.
+
+Syntax:
+```c
+union Data
+{
+    int i;
+    float f;
+    char ch;
+};
+```
+
+Example:
+```c
+#include <stdio.h>
+
+union Data
+{
+    int i;
+    float f;
+    char ch;
+};
+
+int main()
+{
+    union Data d;
+
+    d.i = 10;
+    printf("%d\n", d.i);
+
+    d.f = 5.5;
+    printf("%.2f\n", d.f);
+
+    return 0;
+}
+```
+
+Structure vs Union:
+
+| Structure                                | Union                                            |
+| ---------------------------------------- | ------------------------------------------------ |
+| Each member has separate memory          | All members share the same memory                |
+| Can store all members simultaneously     | Usually one member is used at a time             |
+| Requires more memory                     | Saves memory                                     |
+| Size is generally related to all members | Size is generally the size of the largest member |
+
+Key point:
+```c
+union Data d;
+```
+
+If you do:
+```c
+d.i = 10;
+d.f = 5.5;
+```
+
+both values use the same memory. After assigning `d.f`, you should not rely on the previous value of `d.i`.
+
+Structure → separate memory
+Union → shared memory

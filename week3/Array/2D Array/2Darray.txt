@@ -1,0 +1,1553 @@
+# **************** 2D Arrays in C (Complete Guide) ****************
+
+A 2D array is one of the most important concepts in C programming.
+
+It is mainly used to store data in the form of rows and columns, just like a matrix or table.
+
+---
+
+# Definition
+
+A two-dimensional array is an array of elements of the same data type arranged in rows and columns.
+
+It can be thought of as an array of arrays.
+
+Example:
+
+```c
+int matrix[2][3];
+```
+
+This array contains:
+
+```text
+2 rows
+3 columns
+```
+
+Total elements:
+
+```text
+2 × 3 = 6
+```
+
+---
+
+# Why Do We Need 2D Arrays?
+
+Suppose you want to store marks of 3 students in 4 subjects.
+
+Without a 2D array, you might create many separate variables:
+
+```text
+student1_subject1
+student1_subject2
+student1_subject3
+student1_subject4
+
+student2_subject1
+student2_subject2
+...
+```
+
+This becomes difficult to manage.
+
+Using a 2D array:
+
+```c
+int marks[3][4];
+```
+
+We can represent the data as:
+
+```text
+          Subject
+          1   2   3   4
+Student 1 80  75  90  85
+Student 2 70  88  76  92
+Student 3 95  91  89  87
+```
+
+---
+
+# Syntax of 2D Array
+
+```c
+data_type array_name[rows][columns];
+```
+
+Example:
+
+```c
+int matrix[3][4];
+```
+
+Here:
+
+```text
+int       → data type
+matrix    → array name
+3         → number of rows
+4         → number of columns
+```
+
+Total elements:
+
+```text
+3 × 4 = 12
+```
+
+---
+
+# Components of a 2D Array
+
+A 2D array has three important components.
+
+## 1. Array Name
+
+The name used to identify the array.
+
+Example:
+
+```c
+matrix
+```
+
+---
+
+## 2. Row
+
+A row represents a horizontal collection of elements.
+
+Example:
+
+```text
+10 20 30
+```
+
+This is one row.
+
+---
+
+## 3. Column
+
+A column represents a vertical collection of elements.
+
+Example:
+
+```text
+10
+20
+30
+```
+
+This is one column.
+
+---
+
+# Understanding Rows and Columns
+
+Consider:
+
+```c
+int matrix[3][4];
+```
+
+It contains:
+
+```text
+3 rows
+4 columns
+```
+
+Representation:
+
+```text
+             Columns
+             0   1   2   3
+
+Row 0       [ ] [ ] [ ] [ ]
+Row 1       [ ] [ ] [ ] [ ]
+Row 2       [ ] [ ] [ ] [ ]
+```
+
+Total elements:
+
+```text
+3 × 4 = 12
+```
+
+---
+
+# 2D Array Indexing
+
+2D arrays use two indexes:
+
+```c
+array[row][column]
+```
+
+The first index represents the row.
+
+The second index represents the column.
+
+Example:
+
+```c
+matrix[1][2]
+```
+
+means:
+
+```text
+row = 1
+column = 2
+```
+
+Remember that indexing starts from 0.
+
+For:
+
+```c
+int matrix[3][4];
+```
+
+Valid row indexes:
+
+```text
+0 1 2
+```
+
+Valid column indexes:
+
+```text
+0 1 2 3
+```
+
+---
+
+# Example of 2D Array
+
+```c
+int matrix[2][3] = {
+    {10, 20, 30},
+    {40, 50, 60}
+};
+```
+
+Representation:
+
+```text
+             Column
+             0   1   2
+
+Row 0       10  20  30
+Row 1       40  50  60
+```
+
+Accessing individual elements:
+
+```c
+matrix[0][0] → 10
+matrix[0][1] → 20
+matrix[0][2] → 30
+
+matrix[1][0] → 40
+matrix[1][1] → 50
+matrix[1][2] → 60
+```
+
+---
+
+# Memory Representation
+
+2D arrays in C are stored in contiguous memory using row-major order.
+
+Example:
+
+```c
+int matrix[2][3] = {
+    {10, 20, 30},
+    {40, 50, 60}
+};
+```
+
+Conceptually, memory looks like:
+
+```text
+10 → 20 → 30 → 40 → 50 → 60
+```
+
+If an `int` occupies 4 bytes:
+
+```text
+Address
+
+1000 → 10
+1004 → 20
+1008 → 30
+1012 → 40
+1016 → 50
+1020 → 60
+```
+
+The first complete row is stored first, followed by the second row.
+
+This is called row-major order.
+
+---
+
+# Row-Major Order
+
+C stores multidimensional arrays in row-major order.
+
+Example:
+
+```c
+int a[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+```
+
+Memory order:
+
+```text
+1 → 2 → 3 → 4 → 5 → 6
+```
+
+So:
+
+```text
+Row 0 → 1 2 3
+Row 1 → 4 5 6
+```
+
+The complete first row comes before the second row.
+
+---
+
+# 2D Array Initialization
+
+## 1. Normal Initialization
+
+```c
+int matrix[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+```
+
+---
+
+## 2. Initialization Without Inner Braces
+
+```c
+int matrix[2][3] = {
+    1, 2, 3,
+    4, 5, 6
+};
+```
+
+This is also valid.
+
+It is interpreted as:
+
+```text
+1 2 3
+4 5 6
+```
+
+---
+
+## 3. Partial Initialization
+
+```c
+int matrix[2][3] = {
+    {1, 2},
+    {4}
+};
+```
+
+Remaining elements are automatically initialized to zero.
+
+Result:
+
+```text
+1 2 0
+4 0 0
+```
+
+---
+
+## 4. Zero Initialization
+
+```c
+int matrix[2][3] = {0};
+```
+
+Result:
+
+```text
+0 0 0
+0 0 0
+```
+
+---
+
+## 5. Size Omitted
+
+For a 2D array, the number of rows can be omitted when initializing.
+
+```c
+int matrix[][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+```
+
+The compiler determines the number of rows.
+
+But the column size must be specified.
+
+```c
+int matrix[][3]
+```
+
+is valid.
+
+```c
+int matrix[][] 
+```
+
+is not valid.
+
+---
+
+# Taking Input in a 2D Array
+
+We normally use nested loops.
+
+Example:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int matrix[2][3];
+
+    for(int i = 0; i < 2; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    return 0;
+}
+```
+
+Here:
+
+```text
+i → controls rows
+j → controls columns
+```
+
+---
+
+# Why Do We Use Nested Loops?
+
+A 2D array has two dimensions.
+
+Therefore, we need two loops.
+
+```c
+for(int i = 0; i < rows; i++)
+{
+    for(int j = 0; j < columns; j++)
+    {
+        // access element
+    }
+}
+```
+
+The outer loop handles rows.
+
+The inner loop handles columns.
+
+---
+
+# Traversing a 2D Array
+
+Traversal means visiting every element of the array.
+
+Example:
+
+```c
+int matrix[2][3] = {
+    {10, 20, 30},
+    {40, 50, 60}
+};
+
+for(int i = 0; i < 2; i++)
+{
+    for(int j = 0; j < 3; j++)
+    {
+        printf("%d ", matrix[i][j]);
+    }
+
+    printf("\n");
+}
+```
+
+Output:
+
+```text
+10 20 30
+40 50 60
+```
+
+---
+
+# Understanding Nested Loop Execution
+
+For:
+
+```c
+for(int i = 0; i < 2; i++)
+{
+    for(int j = 0; j < 3; j++)
+    {
+        printf("%d ", matrix[i][j]);
+    }
+}
+```
+
+Execution happens like this:
+
+```text
+i = 0
+
+j = 0
+j = 1
+j = 2
+
+i = 1
+
+j = 0
+j = 1
+j = 2
+```
+
+So the elements are accessed in this order:
+
+```text
+matrix[0][0]
+matrix[0][1]
+matrix[0][2]
+
+matrix[1][0]
+matrix[1][1]
+matrix[1][2]
+```
+
+---
+
+# Printing a 2D Array
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int matrix[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+
+    for(int i = 0; i < 2; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+1 2 3
+4 5 6
+```
+
+---
+
+# Common Operations on 2D Arrays
+
+2D arrays are commonly used for:
+
+* Traversal
+* Input and output
+* Matrix addition
+* Matrix subtraction
+* Matrix multiplication
+* Matrix transpose
+* Finding maximum element
+* Finding minimum element
+* Finding sum of elements
+* Finding row-wise sum
+* Finding column-wise sum
+* Searching
+* Sorting
+* Diagonal operations
+
+---
+
+# Matrix Addition
+
+Two matrices can be added when they have the same dimensions.
+
+Example:
+
+```text
+A =       B =
+
+1 2       5 6
+3 4       7 8
+```
+
+Addition:
+
+```text
+1+5   2+6
+3+7   4+8
+```
+
+Result:
+
+```text
+6  8
+10 12
+```
+
+C program:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a[2][2] = {
+        {1, 2},
+        {3, 4}
+    };
+
+    int b[2][2] = {
+        {5, 6},
+        {7, 8}
+    };
+
+    int sum[2][2];
+
+    for(int i = 0; i < 2; i++)
+    {
+        for(int j = 0; j < 2; j++)
+        {
+            sum[i][j] = a[i][j] + b[i][j];
+        }
+    }
+
+    for(int i = 0; i < 2; i++)
+    {
+        for(int j = 0; j < 2; j++)
+        {
+            printf("%d ", sum[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}
+```
+
+---
+
+# Row Sum
+
+Suppose:
+
+```text
+1 2 3
+4 5 6
+```
+
+Row sums:
+
+```text
+Row 0 → 1 + 2 + 3 = 6
+Row 1 → 4 + 5 + 6 = 15
+```
+
+Program:
+
+```c
+for(int i = 0; i < 2; i++)
+{
+    int sum = 0;
+
+    for(int j = 0; j < 3; j++)
+    {
+        sum = sum + matrix[i][j];
+    }
+
+    printf("Row %d sum = %d\n", i, sum);
+}
+```
+
+---
+
+# Column Sum
+
+For:
+
+```text
+1 2 3
+4 5 6
+```
+
+Column sums:
+
+```text
+Column 0 → 1 + 4 = 5
+Column 1 → 2 + 5 = 7
+Column 2 → 3 + 6 = 9
+```
+
+Program:
+
+```c
+for(int j = 0; j < 3; j++)
+{
+    int sum = 0;
+
+    for(int i = 0; i < 2; i++)
+    {
+        sum = sum + matrix[i][j];
+    }
+
+    printf("Column %d sum = %d\n", j, sum);
+}
+```
+
+Notice the difference:
+
+```text
+Row sum    → i outside, j inside
+Column sum → j outside, i inside
+```
+
+---
+
+# Main Diagonal
+
+A diagonal exists in a square matrix.
+
+Example:
+
+```text
+1 2 3
+4 5 6
+7 8 9
+```
+
+Main diagonal:
+
+```text
+1
+   5
+      9
+```
+
+Elements are:
+
+```text
+matrix[0][0]
+matrix[1][1]
+matrix[2][2]
+```
+
+Condition:
+
+```c
+i == j
+```
+
+Program:
+
+```c
+for(int i = 0; i < 3; i++)
+{
+    for(int j = 0; j < 3; j++)
+    {
+        if(i == j)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+    }
+}
+```
+
+---
+
+# Secondary Diagonal
+
+For:
+
+```text
+1 2 3
+4 5 6
+7 8 9
+```
+
+Secondary diagonal:
+
+```text
+      3
+   5
+7
+```
+
+Elements:
+
+```text
+matrix[0][2]
+matrix[1][1]
+matrix[2][0]
+```
+
+For an `n × n` matrix:
+
+```c
+j = n - 1 - i;
+```
+
+Example:
+
+```c
+for(int i = 0; i < 3; i++)
+{
+    printf("%d ", matrix[i][2 - i]);
+}
+```
+
+---
+
+# Transpose of a Matrix
+
+Transpose means converting rows into columns.
+
+Original:
+
+```text
+1 2 3
+4 5 6
+```
+
+Transpose:
+
+```text
+1 4
+2 5
+3 6
+```
+
+The rule is:
+
+```text
+transpose[j][i] = matrix[i][j]
+```
+
+---
+
+# Function with a 2D Array
+
+A very important concept is passing a 2D array to a function.
+
+Suppose we want a function to print a matrix.
+
+We can create:
+
+```c
+void display(int matrix[2][3])
+{
+    for(int i = 0; i < 2; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+```
+
+Then call it from `main()`:
+
+```c
+int main()
+{
+    int matrix[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+
+    display(matrix);
+
+    return 0;
+}
+```
+
+Complete program:
+
+```c
+#include <stdio.h>
+
+void display(int matrix[2][3])
+{
+    for(int i = 0; i < 2; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+
+int main()
+{
+    int matrix[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+
+    display(matrix);
+
+    return 0;
+}
+```
+
+Output:
+
+```text
+1 2 3
+4 5 6
+```
+
+---
+
+# How Does Passing a 2D Array to a Function Work?
+
+When we call:
+
+```c
+display(matrix);
+```
+
+we don't write:
+
+```c
+display(&matrix);
+```
+
+and we don't write:
+
+```c
+display(matrix[0][0]);
+```
+
+We simply pass:
+
+```c
+display(matrix);
+```
+
+The array name represents the starting address of the 2D array.
+
+The function receives that address and can access the original matrix.
+
+---
+
+# Passing Rows and Columns to a Function
+
+A more flexible approach is:
+
+```c
+void display(int matrix[][3], int rows)
+{
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+```
+
+Calling:
+
+```c
+display(matrix, 2);
+```
+
+Here:
+
+```text
+matrix → 2D array
+2      → number of rows
+```
+
+The column size `3` must be known to the function.
+
+---
+
+# Why Must We Specify the Number of Columns?
+
+This is an important interview concept.
+
+Consider:
+
+```c
+void display(int matrix[][3])
+```
+
+Why do we specify `3`?
+
+Because the compiler needs to know how many elements exist in each row to calculate the address of:
+
+```c
+matrix[i][j]
+```
+
+Conceptually:
+
+```text
+Address of matrix[i][j]
+
+= base address + (i × number_of_columns + j) × sizeof(int)
+```
+
+Therefore, the compiler needs the column count.
+
+For example:
+
+```c
+matrix[1][2]
+```
+
+with 3 columns means:
+
+```text
+1 × 3 + 2
+= 5
+```
+
+So it is the 6th integer from the starting location.
+
+---
+
+# Best Way to Pass a 2D Array to a Function
+
+For a fixed number of columns:
+
+```c
+void display(int matrix[][3], int rows)
+```
+
+For example:
+
+```c
+int matrix[2][3];
+
+display(matrix, 2);
+```
+
+Another equivalent syntax is:
+
+```c
+void display(int matrix[2][3])
+```
+
+or:
+
+```c
+void display(int (*matrix)[3])
+```
+
+These are closely related forms for a 2D array parameter.
+
+---
+
+# Function to Take Input for a Matrix
+
+We can also create a function for input.
+
+```c
+void input(int matrix[][3], int rows)
+{
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+```
+
+Calling:
+
+```c
+input(matrix, 2);
+```
+
+Complete example:
+
+```c
+#include <stdio.h>
+
+void input(int matrix[][3], int rows)
+{
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+void display(int matrix[][3], int rows)
+{
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+
+int main()
+{
+    int matrix[2][3];
+
+    input(matrix, 2);
+
+    display(matrix, 2);
+
+    return 0;
+}
+```
+
+---
+
+# Passing Rows and Columns Dynamically
+
+In modern C, we can use a variable-length array parameter.
+
+Example:
+
+```c
+void display(int rows, int cols, int matrix[rows][cols])
+{
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < cols; j++)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+```
+
+Call:
+
+```c
+int matrix[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+
+display(2, 3, matrix);
+```
+
+Here:
+
+```text
+2 → rows
+3 → columns
+matrix → actual 2D array
+```
+
+This is a useful approach when the dimensions are known at runtime.
+
+---
+
+# Important Rule for Passing 2D Arrays
+
+Remember this:
+
+```c
+void display(int matrix[][3], int rows);
+```
+
+Call:
+
+```c
+display(matrix, rows);
+```
+
+The number of columns must be available to the function.
+
+For example:
+
+```c
+int matrix[5][10];
+```
+
+Function:
+
+```c
+void display(int matrix[][10], int rows);
+```
+
+The `10` is important.
+
+---
+
+# 2D Array vs 1D Array
+
+| 1D Array                    | 2D Array                    |
+| --------------------------- | --------------------------- |
+| Uses one index              | Uses two indexes            |
+| `arr[i]`                    | `arr[i][j]`                 |
+| Represents a list           | Represents rows and columns |
+| Uses one loop for traversal | Usually uses nested loops   |
+| Example: `int arr[5]`       | Example: `int arr[3][4]`    |
+| Used for lists              | Used for matrices/tables    |
+
+---
+
+# 2D Array vs Normal Variable
+
+| Variable            | 2D Array                             |
+| ------------------- | ------------------------------------ |
+| Stores one value    | Stores multiple values               |
+| One memory location | Multiple contiguous memory locations |
+| Example: `int x`    | Example: `int matrix[3][3]`          |
+| Accessed using name | Accessed using two indexes           |
+
+---
+
+# Advantages of 2D Arrays
+
+* Stores data in rows and columns.
+* Easy to represent matrices.
+* Easy to process using nested loops.
+* Fast random access.
+* Elements are stored contiguously.
+* Useful for mathematical operations.
+* Simple representation of tabular data.
+* Useful in many algorithms and data structures.
+
+---
+
+# Disadvantages of 2D Arrays
+
+* Fixed size for ordinary arrays.
+* Cannot automatically grow or shrink.
+* Stores elements of the same data type.
+* Insertion and deletion can be expensive.
+* Large arrays may consume significant memory.
+* No automatic bounds checking in C.
+* Passing multidimensional arrays to functions requires attention to dimensions.
+
+---
+
+# Applications of 2D Arrays
+
+2D arrays are commonly used in:
+
+* Matrices
+* Tables
+* Student marks
+* Employee records
+* Game boards
+* Chess boards
+* Tic-Tac-Toe
+* Image processing
+* Pixel data
+* Graph representations
+* Scientific computing
+* Mathematical calculations
+* Dynamic programming
+* Database-like tabular data
+
+---
+
+# Common Mistakes
+
+### 1. Using an Invalid Row Index
+
+For:
+
+```c
+int matrix[3][4];
+```
+
+Valid row indexes are:
+
+```text
+0 1 2
+```
+
+`matrix[3][0]` is invalid.
+
+---
+
+### 2. Using an Invalid Column Index
+
+For:
+
+```c
+int matrix[3][4];
+```
+
+Valid column indexes are:
+
+```text
+0 1 2 3
+```
+
+`matrix[0][4]` is invalid.
+
+---
+
+### 3. Confusing Rows and Columns
+
+For:
+
+```c
+int matrix[2][3];
+```
+
+It means:
+
+```text
+2 rows
+3 columns
+```
+
+not:
+
+```text
+3 rows
+2 columns
+```
+
+---
+
+### 4. Using Only One Loop
+
+This is not enough to traverse a normal 2D array:
+
+```c
+for(int i = 0; i < 2; i++)
+{
+    printf("%d", matrix[i]);
+}
+```
+
+Normally, we use nested loops:
+
+```c
+for(int i = 0; i < 2; i++)
+{
+    for(int j = 0; j < 3; j++)
+    {
+        printf("%d ", matrix[i][j]);
+    }
+}
+```
+
+---
+
+### 5. Forgetting the Column Size in a Function
+
+Incorrect:
+
+```c
+void display(int matrix[][])
+```
+
+Correct:
+
+```c
+void display(int matrix[][3])
+```
+
+or:
+
+```c
+void display(int rows, int cols, int matrix[rows][cols])
+```
+
+---
+
+# Interview Questions
+
+* What is a 2D array?
+* Why do we use 2D arrays?
+* What is the difference between a 1D and 2D array?
+* How is a 2D array declared?
+* How are 2D arrays stored in memory?
+* What is row-major order?
+* Why does indexing start from 0?
+* How do you access an element of a 2D array?
+* How do you traverse a 2D array?
+* Why are nested loops used with 2D arrays?
+* What is the difference between rows and columns?
+* How do you initialize a 2D array?
+* Can the row size be omitted during initialization?
+* Can the column size be omitted?
+* How do you pass a 2D array to a function?
+* Why must the column size be specified when passing a 2D array?
+* How do you pass rows and columns to a function?
+* What is a matrix?
+* How do you find the transpose of a matrix?
+* How do you find the main diagonal?
+* How do you find the secondary diagonal?
+* How do you perform matrix addition?
+* What happens when an invalid index is accessed?
+* What is row-major order in C?
+
+---
+
+# Quick Syntax Reference
+
+### Declaration
+
+```c
+int matrix[3][4];
+```
+
+### Initialization
+
+```c
+int matrix[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+```
+
+### Access
+
+```c
+matrix[0][0];
+matrix[1][2];
+```
+
+### Input
+
+```c
+scanf("%d", &matrix[i][j]);
+```
+
+### Output
+
+```c
+printf("%d", matrix[i][j]);
+```
+
+### Traversal
+
+```c
+for(int i = 0; i < rows; i++)
+{
+    for(int j = 0; j < columns; j++)
+    {
+        printf("%d ", matrix[i][j]);
+    }
+
+    printf("\n");
+}
+```
+
+### Function
+
+```c
+void display(int matrix[][3], int rows)
+{
+    // code
+}
+```
+
+### Function Call
+
+```c
+display(matrix, 2);
+```
+
+### Variable-Length Array Function
+
+```c
+void display(int rows, int cols, int matrix[rows][cols])
+{
+    // code
+}
+```
+
+### Function Call
+
+```c
+display(2, 3, matrix);
+```
+
+---
+
+# Summary
+
+* A 2D array stores elements in rows and columns.
+* It is essentially an array of arrays.
+* Syntax is `data_type array_name[rows][columns]`.
+* Indexing starts from 0.
+* The first index represents the row.
+* The second index represents the column.
+* 2D arrays are stored in contiguous memory.
+* C uses row-major order.
+* Nested loops are normally used to traverse a 2D array.
+* A 2D array can represent a matrix or table.
+* The column dimension is important when passing a 2D array to a function.
+* A matrix can be passed to a function simply using its array name.
+* Functions can be used separately for input, output, addition, multiplication, transpose, and other matrix operations.
+* 2D arrays are an important foundation for matrices, image processing, game boards, dynamic programming, and many algorithms.

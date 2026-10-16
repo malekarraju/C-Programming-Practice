@@ -1,0 +1,295 @@
+ **************** Arrays in C (Complete Guide) ****************
+
+Arrays are one of the most important concepts in C programming.
+They allow us to store multiple values of the same data type in a single variable.
+
+---
+
+## Definition
+
+An array is a collection of elements of the same data type stored in contiguous (continuous) memory locations.
+Each element is accessed using an index.
+
+---
+
+## Why Do We Need Arrays?
+
+Suppose you want to store the marks of 100 students.
+Without arrays, you would need 100 separate variables:
+marks1, marks2, marks3, ... marks100
+Managing these variables becomes difficult.
+Using an array, all values can be stored under one name.
+
+---
+
+## Characteristics of Arrays
+
+* Stores elements of the same data type.
+* Stored in contiguous memory locations.
+* Size is fixed once the array is created.
+* Each element has a unique index.
+* Indexing starts from 0.
+* Provides fast access to elements using their index.
+
+---
+
+## Components of an Array
+Every array has three important parts.
+
+### 1. Array Name
+The identifier used to refer to the array.
+
+Example:
+marks
+
+---
+
+### 2. Index
+The position of an element inside the array.
+The first element has index 0.
+The last element has index: Size − 1
+
+Example
+| Index | 0  | 1  | 2  | 3  | 4  |
+| ----- | -- | -- | -- | -- | -- |
+| Value | 10 | 20 | 30 | 40 | 50 |
+
+---
+
+### 3. Size
+The maximum number of elements an array can store.
+The size is fixed during declaration and cannot be changed.
+
+---
+
+# Memory Representation
+An array stores its elements continuously in memory.
+
+Example
+```
+Address
+1000 → 10
+1004 → 20
+1008 → 30
+1012 → 40
+1016 → 50
+```
+Because the memory is continuous, accessing any element is very fast.
+
+---
+
+# Array Indexing
+
+Arrays always start indexing from **0**.
+For an array of size **N**
+* First index = 0
+* Last index = N − 1
+
+Example
+Size = 5
+Valid indexes
+```
+0 1 2 3 4
+```
+Invalid indexes
+
+```
+-1
+5
+6
+100
+```
+Accessing an invalid index results in **undefined behavior**.
+
+---
+Array Initialization:
+
+// 1. Compile-Time Initialization
+int arr[5] = {10, 20, 30, 40, 50};
+
+// 2. Size Omitted Initialization
+int arr[] = {10, 20, 30, 40, 50};
+
+// 3. Partial Initialization
+int arr[5] = {10, 20};
+
+// 4. Zero Initialization
+int arr[5] = {0};
+
+// 5. Runtime Initialization
+scanf("%d", &arr[i]);
+
+// 6. Designated Initialization (C99)
+int arr[6] = {[0]=10, [2]=30, [5]=60};
+
+// 7. Character Array Initialization
+char name[5] = {'R','A','J','U','\0'};
+char name[] = "RAJU";
+
+// 8. Float Array Initialization
+float arr[4] = {1.2, 2.3, 3.4, 4.5};
+
+// 9. Double Array Initialization
+double arr[3] = {10.5, 20.5, 30.5};
+
+// 10. One-Dimensional Array Initialization
+int arr[5] = {1, 2, 3, 4, 5};
+
+// 11. Two-Dimensional Array Initialization
+int arr[2][3] = {{1,2,3},{4,5,6}};
+
+// 12. Multidimensional Array Initialization
+int arr[2][2][2] = {{{1,2},{3,4}},{{5,6},{7,8}}};
+---
+
+# Traversing an Array
+Traversal means visiting each element of the array exactly once.
+Traversal is one of the most common operations performed on arrays.
+---
+
+# Common Operations on Arrays
+Arrays support many operations.
+* Traversal
+* Searching
+* Sorting
+* Updating
+* Copying
+* Reversing
+* Finding maximum element
+* Finding minimum element
+* Finding sum
+* Finding average
+---
+
+# Types of Arrays
+
+## 1. One-Dimensional Array (1D)
+Stores elements in a single row.
+Example
+```
+10 20 30 40 50
+```
+
+## 2. Two-Dimensional Array (2D)
+Stores elements in rows and columns.
+Example
+```
+1 2 3
+4 5 6
+```
+Used for matrices and tables.
+
+## 3. Multidimensional Array
+Array having more than two dimensions.
+Example: 3D array
+Used in graphics, simulations, scientific computing, etc.
+---
+
+# Memory Allocation
+Array memory is allocated sequentially.
+Each element occupies memory according to its data type.
+
+Example:
+* char → 1 byte
+* int → 4 bytes
+* float → 4 bytes
+* double → 8 bytes
+---
+
+# Array Name
+The array name represents the address of the first element of the array.
+Because of this, arrays are closely related to pointers.
+---
+
+# Advantages of Arrays
+* Stores multiple values using a single variable.
+* Easy to process using loops.
+* Fast random access using index.
+* Memory is allocated continuously.
+* Simplifies searching and sorting.
+* Reduces the number of variables required.
+* Foundation for many data structures like stacks, queues, heaps, and matrices.
+---
+
+# Disadvantages of Arrays
+* Fixed size.
+* Cannot grow or shrink during execution.
+* Stores only one data type.
+* Insertion and deletion are expensive because elements must be shifted.
+* Wasted memory if the allocated size is larger than required.
+* No automatic bounds checking in C.
+---
+
+# Applications of Arrays
+Arrays are widely used in
+* Storing student records
+* Employee data
+* Banking systems
+* Marks management
+* Matrices
+* Image processing
+* Searching algorithms
+* Sorting algorithms
+* Strings (character arrays)
+* Stacks
+* Queues
+* Graph algorithms
+* Dynamic programming
+---
+
+# Common Mistakes
+
+### 1. Accessing an Invalid Index
+Accessing an index outside the array size leads to undefined behavior.
+---
+
+### 2. Confusing Size with Last Index
+For an array of size 10
+* Size = 10
+* Last index = 9
+---
+
+### 3. Assuming Arrays Grow Automatically
+Arrays in C have a fixed size and cannot automatically expand.
+---
+
+### 4. Mixing Different Data Types
+An array can store only one type of data.
+---
+
+# Difference Between Arrays and Variables
+
+| Variable                  | Array                                |
+| ------------------------- | ------------------------------------ |
+| Stores one value          | Stores multiple values               |
+| Single memory location    | Multiple contiguous memory locations |
+| Accessed directly by name | Accessed using index                 |
+| Suitable for one value    | Suitable for a collection of values  |
+---
+
+# Interview Questions
+* What is an array?
+* Why are arrays needed?
+* Why does array indexing start from 0?
+* How are arrays stored in memory?
+* What is contiguous memory allocation?
+* What is the difference between an array and a variable?
+* What is the difference between a 1D and a 2D array?
+* Why are arrays considered static data structures?
+* What are the advantages and disadvantages of arrays?
+* What happens when an invalid index is accessed?
+* Can an array store different data types?
+* Why are arrays faster than linked lists for random access?
+* Why are insertion and deletion slow in arrays?
+* What are the real-world applications of arrays?
+---
+
+# Summary
+* An array is a collection of elements of the same data type.
+* Elements are stored in contiguous memory locations.
+* Array indexing always starts from 0.
+* Arrays have a fixed size that cannot be changed after creation.
+* Arrays provide fast random access to elements.
+* They are ideal for storing and processing collections of data.
+* Arrays are the foundation of many advanced data structures and algorithms.
+* Although efficient for accessing data, they are less flexible for insertion, deletion, and dynamic resizing.

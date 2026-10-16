@@ -1,0 +1,116 @@
+15/07/2026(Day3): TechnoScripts Batch P123
+
+========================================xx=========================================
+
+Installation Process: VS Code
+
+Install VS Code form chrome for laptop (code editor)
+Install MinGW from chrome for laptop (gcc compiler)
+
+Open MinGW Installer
+    - Install all Basic Package
+           mainly this two: mingw32.gcc bin 6.3.0-1
+                            mingw32.gcc dev 4.8.2
+    - click the check box and apply
+    - close after installation done
+
+Open VS code
+    - Go to Extensions
+    - Search & Install: C/C++ by Microsoft
+    - Search & Install: C/C++ Extension Pack by Microsoft
+    - Search & Install: Code Runner by Jun Han
+
+Open setting in VS code and go to setting
+    - Search code runner and scroll down
+      Tick Code-Runner: Run In Terminal
+           Code-Runner: Run in Terminal
+           Code-Runner: Save All files Before Run
+
+Open the file manger then open local disc C
+    - go to MinGW folder Open bin and copy the path
+
+Search Environment in window
+    - open edit the system environment variable
+    - click on Environment Variables
+    - click on path in user variable for HP
+    - click on Edit environment variable
+    - click on New and paste the path that you copied
+    - click ok ok ok - Done
+
+Search Command Prompt in Window
+    - write command: gcc --version
+    - Enter and check the version, if it showed it is install if not something wrong
+
+Create a Folder in File Manger (where you want) give name like C program
+Open VS code, go to three lines and select Open Floder
+Open the folder that you created
+Now create a new file in that folder like test.c
+Now write program in that window
+    - eg
+                 #include <stdio.h>
+
+                 int main()
+                 {
+
+                   printf("Welcome to VS Code");
+
+                   return 0;
+                 }
+
+Go to Run and select Run Without Debugg
+     - (if run button is not visible) it will show the window to Trust (imp
+     - click on Trust then you will get a run button
+     - on that run button select the run code you get an output in terminal!
+
+
+
+
+========================================xx=============================================
+
+
+16/07/2026(Day4): TechnoScripts Batch P123
+
+Tokens
+const
+type casting
+string & fgets()
+%p for address printing
+Special symbols: {} () [] , : ; * = # ~ .
+Data Types ( Primitive, Derivved, User Defined )
+Range Calculation
+      -  Signed Data Type ( + & - values )
+            Min value:  -2^(n-1)
+            Max value: 2^(n-1)  - 1                     // n is the number of bits represent by the data type
+      - Unsigned Data Type ( only + values )
+            Min value: 0
+            Max value: 2^(n-1)
+ 
+Operators ( Unary, binary, Ternary )
+   - Arthematic Operators ( +, -, *, /, %)
+   - Relational operators ( <, >, <=, >=, ==, !=)
+   - Logical operators ( &&, ||, ! )
+
+
+========================================xx=============================================
+
+17/07/2026(Day5): TechnoScripts Batch P123
+
+Operators
+
+Bitwise Operator ( & | ^ ~ << >> )   -(num+1)
+Binary & Hexadecimal & Octal & Decimal
+Assignment Operator
+
+ternary and sizeof
+
+
+========================================xx=============================================
+
+
+18/07/2026(Day6): TechnoScripts Batch P123
+
+
+sizeof().
+     - sizeof(int)
+     - sizeof(variable)
+ternary: condition? expression_if_true : expression_if_flase;
